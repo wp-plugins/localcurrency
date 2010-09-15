@@ -11,12 +11,12 @@ Show currency values to readers in their local currency (in brackets after the o
 The [LocalCurrency](http://www.jobsinchina.com/resources/wordpress-plugin-localcurrency/ "WordPress plugin to convert currencies in a post to the visitor's local currency") WordPress plugin allows visitors to see currency values in their local currency (in brackets after the original value). For example: If the site?s currency is Chinese yuan and the post contains 10 yuan, a user from Australia will see 10 yuan (AUD$1.53), while a user from US will see 10 yuan (USD$1.39).
 
 = Why Use It? =
-I’ve seen many bloggers write something like: 10 yuan (about $1.50) - because many of their readers don’t know how much the yuan (or whatever currency they are using) is worth. LocalCurrency automatically does this for you and tells readers exactly how much it’s worth, in their own currency, wherever they are from.
+I've seen many bloggers write something like: 10 yuan (about $1.50) - because many of their readers don't know how much the yuan (or whatever currency they are using) is worth. LocalCurrency automatically does this for you and tells readers exactly how much it's worth, in their own currency, wherever they are from.
 
 = Features: =
-* Determines the reader’s country via IP address, using [IP2C](http://firestats.cc/wiki/ip2c)
+* Determines the reader's country via IP address, using [IP2C](http://firestats.cc/wiki/ip2c)
 * Obtains exchange rates from [Yahoo! Finance](http://finance.yahoo.com/)
-* Uses ‘AJAX’ techniques so that converting currency values doesn't delay page load times
+* Uses 'AJAX' techniques so that converting currency values doesn't delay page load times
 * Caches exchange rates locally to minimise calls to Yahoo! Finance
 * Only does something if there is a currency value in the post
 * Allows visitors to change their currency via a selection box
@@ -24,15 +24,15 @@ I’ve seen many bloggers write something like: 10 yuan (about $1.50) - because ma
 * Gives site owner the choice of using current or historic rates (ie at time of post).
 
 = How To Use (once plugin is installed) =
-Enter any currency values you want converted within <–LCSTART–> and <–LCEND–> tags. This can be done through the Code view. Simply select the number to be converted and click the LocalCurrency Quicktag. This should enter the tags for you. For example:
-	<–LCSTART–>$10<–LCEND–>
+Enter any currency values you want converted within <-LCSTART-> and <-LCEND-> tags. This can be done through the Code view. Simply select the number to be converted and click the LocalCurrency Quicktag. This should enter the tags for you. For example:
+	<-LCSTART->$10<-LCEND->
 
 Note: If you disable the plugin, the tags will remain in your post but will not be shown, because they are in a HTML comment.
 
 = Warning =
 The plugin strips non numeric characters (such as $) from between the tags, before converting the value. However, some currency symbols may include numeric characters. For example, 10? may be stored as 10&amp#20803;. The 20803 will remain after the non numeric characters are stripped and will be considered as part of the value to convert, resulting in an incorrect value.
 
-If you experience this problem, simply leave the currency sign outside the tags (ie: <–LCSTART–>10<–LCEND–>?).
+If you experience this problem, simply leave the currency sign outside the tags (ie: <-LCSTART->10<-LCEND->?).
 
 = Compatibility: =
 * This plugin requires WordPress 2.8 or above.
@@ -48,7 +48,7 @@ This plugin is released under the [GPL licence](http://www.gnu.org/copyleft/gpl.
 1. Download the plugin file and unzip it.
 1. Upload the `localcurrency` folder to the `wp-content/plugins/` folder.
 1. Activate the LocalCurrency plugin within WordPress.
-Note: The plugin is large compared to most WordPress plugins, due the IP2C database used to recognise the reader’s country
+Note: The plugin is large compared to most WordPress plugins, due the IP2C database used to recognise the reader's country
 Alternatively, you can install the plugin automatically through the WordPress Admin interface by going to Plugins -> Add New and searching for LocalCurrency.
 
 = Upgrade =
