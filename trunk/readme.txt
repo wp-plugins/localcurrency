@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=sjc@scra
 Tags: currency, exchange rates, currency converter, currency rates, travel, financial
 Requires at least: 2.8.0
 Tested up to: 3.0.1
-Stable tag: 2.0
+Stable tag: 2.1
 Show currency values to readers in their local currency (in brackets after the original value).
 
 == Description ==
@@ -67,6 +67,9 @@ No screenshots exist at this time, but you can see the plugin in action on my
 [Cost of living in China](http://www.jobsinchina.com/blog/the-cost-of-living-in-china/) post.
 
 == Changelog ==
+
+= 2.1 (28th September 2010) =
+* Fixed Major Bug: Users from the site's main location didn't seeing any currency if the Hide Original Price setting was turned on.
 
 = 2.0 (15th September 2010) =
 * Major rewrite of underlying structure to improve efficiency and security.
