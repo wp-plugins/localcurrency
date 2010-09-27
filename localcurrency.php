@@ -3,8 +3,8 @@
 Plugin Name: LocalCurrency
 Plugin URI: http://www.jobsinchina.com/resources/wordpress-plugin-localcurrency/
 Description: Show currency values to readers in their local currency (in brackets after the original value). For example: If the site?s currency is Chinese yuan and the post contains <em>10 yuan</em>, a user from Australia will see <em>10 yuan (AUD$1.53)</em>, while a user from US will see <em>10 yuan (USD$1.39)</em>.
-Version: 2.0
-Date: 15th September 2010
+Version: 2.1
+Date: 28th September 2010
 Author: Stephen Cronin
 Author URI: http://www.scratch99.com/
    
@@ -125,7 +125,11 @@ function localcurrency_head(){
 								alert("Converted "+i+" : " + lc_converted.toFixed(2));
 							<?php } ?>
 							} else {	// else set the div to empty (ie don't want $10(USD$10)).
+							<?php if ($localcurrency_options['hide_base_price'] == 'true') { ?>
+								lc_div.innerHTML = '&nbsp;' + lcto + lcsymbol + lcvalues[i];
+							<?php } else { ?>
 								lc_div.innerHTML ='';
+							<?php } ?>
 							}
 						}
 					}
