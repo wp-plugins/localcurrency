@@ -3,8 +3,8 @@
 Plugin Name: LocalCurrency
 Plugin URI: http://www.jobsinchina.com/resources/wordpress-plugin-localcurrency/
 Description: Show currency values to readers in their local currency (in brackets after the original value). For example: If the site?s currency is Chinese yuan and the post contains <em>10 yuan</em>, a user from Australia will see <em>10 yuan (AUD$1.53)</em>, while a user from US will see <em>10 yuan (USD$1.39)</em>.
-Version: 2.1
-Date: 28th September 2010
+Version: 2.2
+Date: 29th September 2010
 Author: Stephen Cronin
 Author URI: http://www.scratch99.com/
    
@@ -28,6 +28,7 @@ Uses IP2C (http://firestats.cc/wiki/ip2c) to determine user's country
 Uses Yahoo! Finance (http://finance.yahoo.com) for conversion rates
 */
 
+$localcurrency_options = get_option('localcurrency_options');
 
 // ****** SETUP ACTIONS AND FILTERS ******
 register_activation_hook(__FILE__, 'create_localcurrency_options');
@@ -38,7 +39,7 @@ add_action('wp_head', 'localcurrency_head');
 add_action('publish_page', 'localcurrency_publish');
 add_action('publish_post', 'localcurrency_publish');
 add_filter( 'plugin_action_links', 'localcurrency_settings_link', 10, 2 );
-add_filter('the_content', 'localcurrency');		
+add_filter('the_content', 'localcurrency', $localcurrency_options['priority']);		
 // **************************************
 
 // ****** FUNCTION TO CREATE OPTIONS AND DEFAULTS ON ACTIVATION ******
@@ -74,7 +75,7 @@ function localcurrency_head(){
 	global $post;
 	$localcurrency_options = get_option('localcurrency_options');
 	$content = $post->post_content;
-	if (stristr($content,'<!--LCSTART')) {
+	if (stristr($content,'<!--LCSTART') || get_post_meta($post->ID, 'force_lc', true) == 1 ) {
 		echo "<!-- Start of LocalCurrency plugin additions -->\n";
 		// drop to HTML for the Script
 ?>
@@ -168,7 +169,7 @@ function localcurrency_scripts() {
 	global $post;
 	$content = $post->post_content;
 	// only call them if the post includes the tag
-	if (stristr($content,'<!--LCSTART')) {	
+	if (stristr($content,'<!--LCSTART') || get_post_meta($post->ID, 'force_lc', true) == 1 ) {	
 		$plugin_name = dirname(plugin_basename(__FILE__));
 		wp_enqueue_script('localcurrency', plugins_url($plugin_name.'/includes/localcurrency.js'));
 	}

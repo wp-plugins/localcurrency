@@ -21,6 +21,7 @@
 			if ($_POST['hide_base_price']=='true') {$localcurrency_options['hide_base_price'] = 'true';} else {$localcurrency_options['hide_base_price'] = 'false';} 
 			if ($_POST['freeze_prices']=='true') {$localcurrency_options['freeze_prices'] = 'true';} else {$localcurrency_options['freeze_prices'] = 'false';} 
 			if ($_POST['debug']=='true') {$localcurrency_options['debug'] = 'true';} else {$localcurrency_options['debug'] = 'false';} 
+			$localcurrency_options['priority'] = absint($_POST['priority']); 
 			update_option('localcurrency_options', $localcurrency_options);
 			echo '<div id="message" class="updated"><p><strong>';
 			_e('Options saved.');
@@ -67,9 +68,13 @@
 						<p><input type="checkbox" name="link_on" id="link_on" value="true" <?php if ($localcurrency_options['link_on']=='true') {echo 'checked="checked"';}?> />
 						By default, a link to the plugin home page is included on pages where there are values to be converted. Deselect this parameter if you want to disable the link. Note: It is not possible to turn off the link to Yahoo! Finance due to legal requirements.</p>
 						
+						<h4>Plugin Firing Priorty:</h4>
+						<p><input type="text" size="4" name="priority" id="priority" value="<?php echo $localcurrency_options['priority']; ?>" />
+						Controls the order that this plugin fires, to help resolve conflicts with other plugins. Change this only if directed to for support reasons.</p>
+
 						<h4>Debug Mode:</h4>
 						<p><input type="checkbox" name="debug" id="debug" value="true" <?php if ($localcurrency_options['debug']=='true') {echo 'checked="checked"';}?> />
-						Only needed if feedback is required for support reasons.</p>
+						Change this only if directed to for support reasons.</p>
 
 						<!-- Show Update Button -->
 						<div class="submit">

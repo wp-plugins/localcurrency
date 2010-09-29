@@ -12,6 +12,7 @@
 	if (!isset($localcurrency_options['hide_base_price'])){ $localcurrency_options['hide_base_price'] = 'false';}
 	if (!isset($localcurrency_options['freeze_prices'])){ $localcurrency_options['freeze_prices'] = 'false';}
 	if (!isset($localcurrency_options['debug'])){ $localcurrency_options['debug'] = 'false';}
+	if (!isset($localcurrency_options['priority'])){ $localcurrency_options['priority'] = 10;}
 	
 	// create the currency list array and set that as an option
 	$lc_currencylist = array();
