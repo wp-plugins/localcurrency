@@ -30,7 +30,7 @@ Enter any currency values you want converted within `<!--LCSTART-->` and `<!--LC
 Note: If you disable the plugin, the tags will remain in your post but will not be shown, because they are in a HTML comment.
 
 = Warning =
-The plugin strips non numeric characters (such as $) from between the tags, before converting the value. However, some currency symbols may include numeric characters. For example, 10&#20803; may be stored as 10`&#20803;`. The 20803 will remain after the non numeric characters are stripped and will be considered as part of the value to convert, resulting in an incorrect value.
+The plugin strips non numeric characters (such as $) from between the tags, before converting the value. However, some currency symbols may include numeric characters. For example, 10&#20803; may be stored as 10&amp;#20803;. The 20803 will remain after the non numeric characters are stripped and will be considered as part of the value to convert, resulting in an incorrect value.
 
 If you experience this problem, simply leave the currency sign outside the tags (ie: `<!--LCSTART-->`10`<!--LCEND-->`&#20803;).
 
