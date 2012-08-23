@@ -24,15 +24,15 @@ I've seen many bloggers write something like: 10 yuan (about $1.50) - because ma
 * Gives site owner the choice of using current or historic rates (ie at time of post).
 
 = How To Use (once plugin is installed) =
-Enter any currency values you want converted within `<-LCSTART->` and `<-LCEND->` tags. This can be done through the Code view. Simply select the number to be converted and click the LocalCurrency Quicktag. This should enter the tags for you. For example:
-	`<-LCSTART->`$10`<-LCEND->`
+Enter any currency values you want converted within `<!--LCSTART-->` and `<!--LCEND-->` tags. This can be done through the Code view. Simply select the number to be converted and click the LocalCurrency Quicktag. This should enter the tags for you. For example:
+	`<!--LCSTART-->`$10`<!--LCEND-->`
 
 Note: If you disable the plugin, the tags will remain in your post but will not be shown, because they are in a HTML comment.
 
 = Warning =
-The plugin strips non numeric characters (such as $) from between the tags, before converting the value. However, some currency symbols may include numeric characters. For example, 10&#20803; may be stored as 10&amp#20803;. The 20803 will remain after the non numeric characters are stripped and will be considered as part of the value to convert, resulting in an incorrect value.
+The plugin strips non numeric characters (such as $) from between the tags, before converting the value. However, some currency symbols may include numeric characters. For example, 10&#20803; may be stored as 10`&#20803;`. The 20803 will remain after the non numeric characters are stripped and will be considered as part of the value to convert, resulting in an incorrect value.
 
-If you experience this problem, simply leave the currency sign outside the tags (ie: <-LCSTART->10<-LCEND->&#20803;).
+If you experience this problem, simply leave the currency sign outside the tags (ie: `<!--LCSTART-->`10`<!--LCEND-->`&#20803;).
 
 = Compatibility: =
 * This plugin requires WordPress 2.8 or above.
