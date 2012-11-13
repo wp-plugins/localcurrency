@@ -3,8 +3,8 @@ Contributors: StephenCronin
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=sjc@scratch99.com&currency_code=&amount=&return=&item_name=WP-LocalCurrency
 Tags: currency, exchange rates, currency converter, currency rates, travel, financial
 Requires at least: 2.8.0
-Tested up to: 3.4.1
-Stable tag: 2.2
+Tested up to: 3.4.2
+Stable tag: 2.3
 Show currency values to readers in their local currency (in brackets after the original value).
 
 == Description ==
@@ -67,6 +67,11 @@ No screenshots exist at this time, but you can see the plugin in action on my
 [Cost of living in China](http://www.jobsinchina.com/blog/the-cost-of-living-in-china/) post.
 
 == Changelog ==
+
+= 2.3 (13th November 2012) =
+* Fixed Major Bug: Plugin was trying to load local exchange rate JSON file rather than the one from Yahoo.
+* Fixed Major Bug: Yahoo has changed the format of the exchange rate JSON file slightly, which broke the plugin.
+* Fixed: Removed the nonce check which was failing when sites used caching plugins such as W3TC or WP Super Cache.
 
 = 2.2 (29th September 2010) =
 * New Feature: Adding a custom field called force_lc with a value of 1 will force LocalCurrency to run, even if there is no 'shortcode' on the page (only useful where the shortcode is added by another plugin)

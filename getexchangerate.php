@@ -12,8 +12,8 @@ foreach ($_GET as $key => $value) {
 	$_GET[$key] = htmlentities(stripslashes($value));	
 }
 
-// don't proceed if we don't have enough info or if the nonce fails
-if (!isset($_GET['from']) || !isset($_GET['to']) || !check_admin_referer('localcurrency-lets-get-some-rates-shall-we')) {
+// don't proceed if we don't have enough info (nonce removed in 2.3 because of clash with caching plugin)
+if (!isset($_GET['from']) || !isset($_GET['to'])) {
 	return;
 }
 

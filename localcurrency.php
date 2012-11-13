@@ -3,12 +3,12 @@
 Plugin Name: LocalCurrency
 Plugin URI: http://www.jobsinchina.com/resources/wordpress-plugin-localcurrency/
 Description: Show currency values to readers in their local currency (in brackets after the original value). For example: If the site?s currency is Chinese yuan and the post contains <em>10 yuan</em>, a user from Australia will see <em>10 yuan (AUD$1.53)</em>, while a user from US will see <em>10 yuan (USD$1.39)</em>.
-Version: 2.2
-Date: 29th September 2010
+Version: 2.3
+Date: 13th November 2012
 Author: Stephen Cronin
 Author URI: http://www.scratch99.com/
    
-   Copyright 2008 - 2010 Stephen Cronin  (email : sjc@scratch99.com)
+   Copyright 2008 - 2012 Stephen Cronin  (email : sjc@scratch99.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -200,9 +200,8 @@ function get_from_yahoo() {
 	// set the host name variable and get the file
 	$lc_date_to_get = date("Ymd",time()-86400);
 	$lc_ajax_host = 'http://finance.yahoo.com/connection/currency-converter-cache?date='.$lc_date_to_get.'&output=json';
-	$lc_ajax_host = 'http://localhost/wpr/fromyahoo.js';
 	$lc_ajax_data = wp_remote_get($lc_ajax_host);
-
+	
 	// if it returns an error, then lets get out of here.
 	if (is_wp_error($lc_ajax_data)) {
 		return;
@@ -211,10 +210,9 @@ function get_from_yahoo() {
 	// grab the body, remove the JSONP wrapper, then decode it
 	$lc_ajax_data = $lc_ajax_data['body'];
 	$lc_ajax_data = str_replace("YAHOO.Finance.CurrencyConverter.addConversionRates(",'',$lc_ajax_data);
-	//$lc_ajax_data = str_replace(",\n]\n}\n}\n);",']}}',$lc_ajax_data);
-	$lc_ajax_data = substr($lc_ajax_data,0,strrpos($lc_ajax_data,',')).']}}';
+	$lc_ajax_data = substr($lc_ajax_data,0,strrpos($lc_ajax_data,');'));
 	$lc_ajax_data = json_decode($lc_ajax_data,true);
-	
+
 	// if the output of json_decode isn't an array, let's get out of here.
 	if (!is_array($lc_ajax_data)) {
 		return;
