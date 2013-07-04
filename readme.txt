@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=sjc@scra
 Tags: currency, exchange rates, currency converter, currency rates, travel, financial
 Requires at least: 2.8.0
 Tested up to: 3.5.2
-Stable tag: 2.4
+Stable tag: 2.5
 Show currency values to readers in their local currency (in brackets after the original value).
 
 == Description ==
@@ -20,13 +20,15 @@ I've seen many bloggers write something like: 10 yuan (about $1.50) - because ma
 * Caches exchange rates locally to minimise calls to Yahoo! Finance
 * Only does something if there is a currency value in the post
 * Allows visitors to change their currency via a selection box
+* Allows the conversion of a currency range (eg $50-100)
 * Gives site owner the ability to hide the original value if desired
 * Gives site owner the choice of using current or historic rates (ie at time of post).
 
 = How To Use (once plugin is installed) =
 Enter any currency values you want converted within `<!--LCSTART-->` and `<!--LCEND-->` tags. This can be done through the Code view. Simply select the number to be converted and click the LocalCurrency Quicktag. This should enter the tags for you. For example:
 	`<!--LCSTART-->`$10`<!--LCEND-->`
-
+For a currency range, use a hyphen between values (without spaces), eg:
+	`<!--LCSTART-->$50-100<!--LCEND-->`
 Note: If you disable the plugin, the tags will remain in your post but will not be shown, because they are in a HTML comment.
 
 = Warning =
@@ -39,7 +41,7 @@ If you experience this problem, simply leave the currency sign outside the tags 
 * I am not currently aware of any compatibility issues with any other WordPress plugins.
 
 = Support: =
-This plugin is officially not supported (due to my time constraints), but if you leave a comment on the plugin's home page or [contact me](http://www.scratch99.com/contact/), I should be able to help.
+This plugin is officially not supported (due to my time constraints), but if you post problems to the [support forum](http://wordpress.org/support/plugin/localcurrency), I'll try to help.
 
 = Disclaimer =
 This plugin is released under the [GPL licence](http://www.gnu.org/copyleft/gpl.html). I do not accept any responsibility for any damages or losses, direct or indirect, that may arise from using the plugin or these instructions. This software is provided as is, with absolutely no warranty. Please refer to the full version of the GPL license for more information.
@@ -63,10 +65,12 @@ Alternatively, you can update this plugin through the WordPress Admin interface.
 This plugin was created in my spare time, which is ever-dwindling. I have intentions to update it regularly, but recognise that other things must take precendence. If you have a request, by all means [contact me](http://www.scratch99.com/contact/) and I'll put it on the list of things to do, but I can't guarantee how long it will take.
 
 == Screenshots ==
-No screenshots exist at this time, but you can see the plugin in action on my 
-[Cost of living in China](http://www.jobsinchina.com/blog/the-cost-of-living-in-china/) post.
+No screenshots exist at this time, but you can see the plugin in action on my [Cost of living in China](http://www.jobsinchina.com/blog/the-cost-of-living-in-china/) post.
 
 == Changelog ==
+
+= 2.5 (4th July 2013) =
+* New Feature: Plugin now converts currency ranges, eg $50-100. See the How To Use section for details.
 
 = 2.4 (28th June 2013) =
 * Fixed Major Bug: If the value to convert contained a decimal point, the converted value was 100 times what it should be.

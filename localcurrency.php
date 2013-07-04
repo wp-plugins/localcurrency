@@ -3,12 +3,12 @@
 Plugin Name: LocalCurrency
 Plugin URI: http://www.jobsinchina.com/resources/wordpress-plugin-localcurrency/
 Description: Show currency values to readers in their local currency (in brackets after the original value). For example: If the site?s currency is Chinese yuan and the post contains <em>10 yuan</em>, a user from Australia will see <em>10 yuan (AUD$1.53)</em>, while a user from US will see <em>10 yuan (USD$1.39)</em>.
-Version: 2.4
-Date: 28th June 2013
+Version: 2.5
+Date: 4th July 2013
 Author: Stephen Cronin
 Author URI: http://www.scratch99.com/
    
-   Copyright 2008 - 2012 Stephen Cronin  (email : sjc@scratch99.com)
+   Copyright 2008 - 2013 Stephen Cronin  (email : sjc@scratch99.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -115,15 +115,26 @@ function localcurrency_head(){
 						for (var i = 0; i <= lcvalues.length-1; i++) { 
 							lc_div = document.getElementById("localcurrency"+postid+"-"+i);	// get the div element for this occurrence
 							if (lcfrom != lcto) {	// If from and to currency are different work out the value and update the div
-								lc_converted = lcvalues[i] * lc_rate;
-							<?php if ($localcurrency_options['hide_base_price'] == 'true') { ?>
-								lc_div.innerHTML = '&nbsp;' + lcto + lcsymbol + lc_converted.toFixed(2);
-							<?php } else { ?>
-								lc_div.innerHTML = '&nbsp;(' + lcto + lcsymbol + lc_converted.toFixed(2) + ')';
-							<?php } ?>
+								// if the value has a "_" then it's a range, else it's a single value
+								if ( lcvalues[i].indexOf('_') != -1 ) {
+									var thisValueArray = lcvalues[i].split("_");
+								<?php if ($localcurrency_options['hide_base_price'] == 'true') { ?>
+									lc_converted =  '&nbsp;' + lcto + lcsymbol + (thisValueArray[0] * lc_rate).toFixed(2) + ' - ' + lcsymbol + (thisValueArray[1] * lc_rate).toFixed(2);
+								<?php } else { ?>
+									lc_converted = '&nbsp;(' + lcto + lcsymbol + (thisValueArray[0] * lc_rate).toFixed(2) + ' - ' + lcsymbol + (thisValueArray[1] * lc_rate).toFixed(2) + ')';
+								<?php } ?>
+								}
+								else {
+								<?php if ($localcurrency_options['hide_base_price'] == 'true') { ?>
+									lc_converted =  '&nbsp;' + lcto + lcsymbol + (lcvalues[i] * lc_rate).toFixed(2);
+								<?php } else { ?>
+									lc_converted =  '&nbsp;(' + lcto + lcsymbol + (lcvalues[i] * lc_rate).toFixed(2) + ')';
+								<?php } ?>
+								}
+								lc_div.innerHTML = lc_converted;
 							<?php if (current_user_can('update_plugins') && $localcurrency_options['debug'] == 'true') { ?>
 								alert("Value "+i+" : " + lcvalues[i]);
-								alert("Converted "+i+" : " + lc_converted.toFixed(2));
+								alert("Converted "+i+" : " + lc_converted);
 							<?php } ?>
 							} else {	// else set the div to empty (ie don't want $10(USD$10)).
 							<?php if ($localcurrency_options['hide_base_price'] == 'true') { ?>
@@ -245,7 +256,9 @@ function localcurrency($content){
 			$startpos = strpos($content,'<!--LCSTART-->') + 14;
 			$endpos = strpos($content,'<!--LCEND-->');
 			$value = substr($content, $startpos, $endpos - $startpos);
-			$value = preg_replace ('/[^0-9.]*/', '', $value);
+			// cater for ranges
+			$value = str_replace( '-' , '_' , $value );
+			$value = preg_replace ('/[^0-9._]*/', '', $value);
 			$lc_values[$i] = $value;
 			if ($localcurrency_options['hide_base_price'] == 'true') {
 				$data = $data . substr($content, 0, $startpos - 15) . '<span id="localcurrency'. $post_id.'-'.$i . '"> '.substr($content, $startpos, $endpos - $startpos).'</span>';
@@ -261,10 +274,10 @@ function localcurrency($content){
 		if (count($lc_values)>1) { 
 			foreach ($lc_values as $key => $value){
 				if ($key < ($i-1)){
-					$script .= $value . ',';
+					$script .= '"' . $value . '",';
 				}
 				else {
-					$script .= $value . ");\n";
+					$script .= '"' . $value . '");' . "\n";
 				}
 			}
 		} 
