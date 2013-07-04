@@ -27,8 +27,10 @@ I've seen many bloggers write something like: 10 yuan (about $1.50) - because ma
 = How To Use (once plugin is installed) =
 Enter any currency values you want converted within `<!--LCSTART-->` and `<!--LCEND-->` tags. This can be done through the Code view. Simply select the number to be converted and click the LocalCurrency Quicktag. This should enter the tags for you. For example:
 	`<!--LCSTART-->`$10`<!--LCEND-->`
+
 For a currency range, use a hyphen between values (without spaces), eg:
 	`<!--LCSTART-->$50-100<!--LCEND-->`
+
 Note: If you disable the plugin, the tags will remain in your post but will not be shown, because they are in a HTML comment.
 
 = Warning =
