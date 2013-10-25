@@ -3,8 +3,8 @@
 Plugin Name: LocalCurrency
 Plugin URI: http://www.jobsinchina.com/resources/wordpress-plugin-localcurrency/
 Description: Show currency values to readers in their local currency (in brackets after the original value). For example: If the site?s currency is Chinese yuan and the post contains <em>10 yuan</em>, a user from Australia will see <em>10 yuan (AUD$1.53)</em>, while a user from US will see <em>10 yuan (USD$1.39)</em>.
-Version: 2.5
-Date: 4th July 2013
+Version: 2.6
+Date: 25th October 2013
 Author: Stephen Cronin
 Author URI: http://www.scratch99.com/
    
@@ -33,7 +33,7 @@ $localcurrency_options = get_option('localcurrency_options');
 // ****** SETUP ACTIONS AND FILTERS ******
 register_activation_hook(__FILE__, 'create_localcurrency_options');
 add_action('admin_menu', 'localcurrency_admin');
-add_action('admin_footer', 'localcurrency_footer_admin');
+add_action( 'admin_print_footer_scripts', 'localcurrency_add_quicktags' );
 add_action('wp_print_styles', 'localcurrency_scripts');
 add_action('wp_head', 'localcurrency_head');
 add_action('publish_page', 'localcurrency_publish');
@@ -282,7 +282,7 @@ function localcurrency($content){
 			}
 		} 
 		else {	// can't create an array that just has one integer element using Array()
-			$script .= "1);\nlcValues".$post_id."[0]=" . $lc_values[0] . ";\n";
+			$script .= "1);\nlcValues".$post_id."[0]=\"" . $lc_values[0] . "\";\n";
 		}
 		// call the function to convert the currencies in lcValues
 		$script .= 'localCurrency("'.$localcurrency_options['site_currency'].'","'.$usercurrency.'",lcValues'.$post_id.",$post_id);\n</script>\n";
@@ -321,48 +321,17 @@ function localcurrency_userlocation() {
 }
 // ************************************************
 
-// ****** FUNCTION TO ADD QUICKTAGS TO WRITE POST PAGE ******
-function localcurrency_footer_admin() {
-	// only on the edit and new post screens
-	if ((stristr($_SERVER['REQUEST_URI'],'wp-admin/post.php') || stristr($_SERVER['REQUEST_URI'],'wp-admin/post-new.php')) && current_user_can('update_plugins')) {
-	
-		// Based on WP-AddQuicktag (http://bueltge.de/wp-addquicktags-de-plugin/120/)
-		$numberofstyles=1;	// allows for multiple styles, we only need one, but no need to change.
-		echo <<<EOT
-		<script type="text/javascript">		
-			if(wpaqToolbar = document.getElementById("ed_toolbar")){
-				var wpaqNr, wpaqBut, wpaqStart, wpaqEnd;
-EOT;
-				for ($i = 1; $i <= $numberofstyles; $i++){
-					$b = array("text"=>"LocalCurrency","title"=>"Insert tags for LocalCurrency","start"=>"<!--LCSTART-->","end"=>"<!--LCEND-->");
-					$start = preg_replace('![\n\r]+!', "\\n", $b['start']);
-					$start = str_replace("'", "\'", $start);
-					$end = preg_replace('![\n\r]+!', "\\n", $b['end']);
-					$end = str_replace("'", "\'", $end);
-					echo <<<EOT
-							wpaqStart = '{$start}';
-							wpaqEnd = '{$end}';
-							wpaqNr = edButtons.length;
-							edButtons[wpaqNr] = new edButton('ed_wpaq{$i}','{$b['txt']}',wpaqStart, wpaqEnd,'');
-							var wpaqBut = wpaqToolbar.lastChild;
-							while (wpaqBut.nodeType != 1){
-								wpaqBut = wpaqBut.previousSibling;
-							}
-							wpaqBut = wpaqBut.cloneNode(true);
-							wpaqToolbar.appendChild(wpaqBut);
-							wpaqBut.value = '{$b['text']}';
-							wpaqBut.title = '{$b['title']}';
-							wpaqBut.buttonno = wpaqNr;
-							wpaqBut.onclick = function () {edInsertTag(edCanvas, parseInt(this.buttonno));}
-							wpaqBut.id = "ed_wpaq{$i}";
-EOT;
-					}
-			echo <<<EOT
-				}
-			</script>
-EOT;
-		}
+// ****** FUNCTION TO ADD QUICKTAG ******
+function localcurrency_add_quicktags() {
+	if ( wp_script_is( 'quicktags' ) ) {
+?>
+	<script type="text/javascript">
+	QTags.addButton( 'localcurrency', 'LocalCurrency', '<!--LCSTART-->', '<!--LCEND-->', '', 'Insert tags for LocalCurrency' );
+	</script>
+<?php
 	}
-// ********************************************************
+}
+// **************************************
+
 
 ?>
