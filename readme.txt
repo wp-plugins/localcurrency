@@ -3,8 +3,8 @@ Contributors: StephenCronin
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=sjc@scratch99.com&currency_code=&amount=&return=&item_name=WP-LocalCurrency
 Tags: currency, exchange rates, currency converter, currency rates, travel, financial
 Requires at least: 2.8.0
-Tested up to: 3.6.1
-Stable tag: 2.6
+Tested up to: 4.0
+Stable tag: 2.7
 Show currency values to readers in their local currency (in brackets after the original value).
 
 == Description ==
@@ -70,6 +70,9 @@ This plugin was created in my spare time, which is ever-dwindling. I have intent
 No screenshots exist at this time, but you can see the plugin in action on my [Cost of living in China](http://www.jobsinchina.com/blog/the-cost-of-living-in-china/) post.
 
 == Changelog ==
+
+= 2.7 (23rd October 2014) =
+* Fixed Major Bug: The URL required for the call to Yahoo! Finance changed, so conversions stopped happening.
 
 = 2.6 (25th October 2013) =
 * Fixed Major Bug: Conversion was broken when there was only one conversion on a page.

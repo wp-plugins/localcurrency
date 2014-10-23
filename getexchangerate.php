@@ -98,7 +98,7 @@ function get_conversion( $cur_from, $cur_to )
 			$file="/d/quotes.csv";
 			$str = "?s=".$cur_from.$cur_to."=X&f=sl1d1t1ba&e=.csv";
 			$out = "GET ".$file.$str." HTTP/1.0\r\n";
-		    $out .= "Host: www.yahoo.com\r\n";
+		    $out .= "Host: download.finance.yahoo.com\r\n";
 			$out .= "Connection: Close\r\n\r\n";
 			@fputs($fp, $out);
 			$data = '';
