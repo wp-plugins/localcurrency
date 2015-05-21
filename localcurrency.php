@@ -3,12 +3,12 @@
 Plugin Name: LocalCurrency
 Plugin URI: http://www.jobsinchina.com/resources/wordpress-plugin-localcurrency/
 Description: Show currency values to readers in their local currency (in brackets after the original value). For example: If the site?s currency is Chinese yuan and the post contains <em>10 yuan</em>, a user from Australia will see <em>10 yuan (AUD$1.53)</em>, while a user from US will see <em>10 yuan (USD$1.39)</em>.
-Version: 2.7
-Date: 23rd October 2014
+Version: 2.8
+Date: 21st May 2015
 Author: Stephen Cronin
 Author URI: http://www.scratch99.com/
    
-   Copyright 2008 - 2013 Stephen Cronin  (email : sjc@scratch99.com)
+   Copyright 2008 - 2015 Stephen Cronin  (email : sjc@scratch99.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -28,10 +28,13 @@ Uses IP2C (http://firestats.cc/wiki/ip2c) to determine user's country
 Uses Yahoo! Finance (http://finance.yahoo.com) for conversion rates
 */
 
+// set the current plugin version
+$localcurrency_version = '2.8';
+
+// get the options
 $localcurrency_options = get_option('localcurrency_options');
 
 // ****** SETUP ACTIONS AND FILTERS ******
-register_activation_hook(__FILE__, 'create_localcurrency_options');
 add_action('admin_menu', 'localcurrency_admin');
 add_action( 'admin_print_footer_scripts', 'localcurrency_add_quicktags' );
 add_action('wp_print_styles', 'localcurrency_scripts');
@@ -42,11 +45,22 @@ add_filter( 'plugin_action_links', 'localcurrency_settings_link', 10, 2 );
 add_filter('the_content', 'localcurrency', $localcurrency_options['priority']);		
 // **************************************
 
-// ****** FUNCTION TO CREATE OPTIONS AND DEFAULTS ON ACTIVATION ******
-function create_localcurrency_options() {
-	require_once('localcurrency-activate.php');
+// ****** FUNCTION TO UPDATE THE OPTIONS ON UPGRADE (IF NECESSARY) ******
+function update_localcurrency_options() {
+
+	// get the plugin options
+	$localcurrency_options = get_option('localcurrency_options');
+
+	// if it's not the latest version, let's make sure that we have all the settings we need for this version
+	if ( empty( $localcurrency_options[ 'version' ] ) || version_compare( $localcurrency_version, $localcurrency_options[ 'version' ], '>' ) ) {
+		$localcurrency_options[ 'version' ] = $localcurrency_version;
+		require_once('localcurrency-activate.php');
+		update_option('localcurrency_options', $localcurrency_options);
+	}
+
 }
-// ******************************************************************
+add_action( 'init', 'update_localcurrency_options', 0 );
+// **********************************************************************
 
 // ****** FUNCTION TO CREATE THE ADMIN PAGE ******
 function localcurrency_admin() {
@@ -294,7 +308,7 @@ function localcurrency($content){
 		if ($localcurrency_options['link_on']=='true') {
 			$script .= ' <a href="http://www.jobsinchina.com/resources/wordpress-plugin-localcurrency/" title="The LocalCurrency Plugin For WordPress" target="_blank">LocalCurrency</a>';
 		} else {
-			$script .= ' the LocalCurrency plugin for WordPress';
+			$script .= ' LocalCurrency';
 		}
 		$script .= '. Rates from <a href="http://finance.yahoo.com" title="Visit Yahoo! Finance" target="_blank">Yahoo! Finance</a></small></form>'."\n";
 		// return filtered content

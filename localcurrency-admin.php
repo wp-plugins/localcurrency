@@ -119,7 +119,7 @@
 						<li><a href="http://www.scratch99.com/feed/">Subscribe to my feed</a> to learn about new plugins I'm working on</li>
 						</ul>
 						<p>I also provide <a href="http://www.scratch99.com/services/">wordpress and web development services</a>.
-						<p><small>Copyright 2008 - 2010 by Stephen Cronin. Released under the GNU General Public License (version 2 or later).</small></p>
+						<p><small>Copyright 2008 - 2015 by Stephen Cronin. Released under the GNU General Public License (version 2 or later).</small></p>
 					</div> <!-- class="inside" -->
 				</div> <!-- class="stuffbox" -->
 
