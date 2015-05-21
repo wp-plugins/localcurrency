@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=sjc@scra
 Tags: currency, exchange rates, currency converter, currency rates, travel, financial
 Requires at least: 2.8.0
 Tested up to: 4.2.2
-Stable tag: 2.8
+Stable tag: 2.8.1
 Show currency values to readers in their local currency (in brackets after the original value).
 
 == Description ==
@@ -70,6 +70,9 @@ This plugin was created in my spare time, which is ever-dwindling. I have intent
 No screenshots exist at this time, but you can see the plugin in action on my [Cost of living in China](http://www.jobsinchina.com/blog/the-cost-of-living-in-china/) post.
 
 == Changelog ==
+
+= 2.8.1 (21st May 2015) =
+* Update: Added Armenian AMD and Georgian GEL.
 
 = 2.8 (21st May 2015) =
 * Update: Updated the currency list to reflect which currencies are used in which countries in 2015.

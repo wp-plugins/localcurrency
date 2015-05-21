@@ -3,7 +3,7 @@
 Plugin Name: LocalCurrency
 Plugin URI: http://www.jobsinchina.com/resources/wordpress-plugin-localcurrency/
 Description: Show currency values to readers in their local currency (in brackets after the original value). For example: If the site?s currency is Chinese yuan and the post contains <em>10 yuan</em>, a user from Australia will see <em>10 yuan (AUD$1.53)</em>, while a user from US will see <em>10 yuan (USD$1.39)</em>.
-Version: 2.8
+Version: 2.8.1
 Date: 21st May 2015
 Author: Stephen Cronin
 Author URI: http://www.scratch99.com/
@@ -29,7 +29,7 @@ Uses Yahoo! Finance (http://finance.yahoo.com) for conversion rates
 */
 
 // set the current plugin version
-$localcurrency_version = '2.8';
+$localcurrency_version = '2.8.1';
 
 // get the options
 $localcurrency_options = get_option('localcurrency_options');
