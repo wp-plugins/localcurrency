@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=sjc@scra
 Tags: currency, exchange rates, currency converter, currency rates, travel, financial
 Requires at least: 2.8.0
 Tested up to: 4.2.2
-Stable tag: 2.8.1
+Stable tag: 2.9
 Show currency values to readers in their local currency (in brackets after the original value).
 
 == Description ==
@@ -22,21 +22,32 @@ I've seen many bloggers write something like: 10 yuan (about $1.50) - because ma
 * Allows visitors to change their currency via a selection box
 * Allows the conversion of a currency range (eg $50-100)
 * Gives site owner the ability to hide the original value if desired
-* Gives site owner the choice of using current or historic rates (ie at time of post).
+* Gives site owner the choice of using current or historic rates (ie at time of post)
+* Now works with mulitple source curriencies
 
 = How To Use (once plugin is installed) =
-Enter any currency values you want converted within `<!--LCSTART-->` and `<!--LCEND-->` tags. This can be done through the Code view. Simply select the number to be converted and click the LocalCurrency Quicktag. This should enter the tags for you. For example:
-	`<!--LCSTART-->`$10`<!--LCEND-->`
+Enter any currency values you want converted using the localcurrency shortcode. For example:
+
+	`[localcurrency]$65[/localcurrency]`
+
+This can be done manually through the Visual view in the post editor, or using the LocalCurrency Quicktag in the Code view (select the number to be converted and click the quicktag). 
 
 For a currency range, use a hyphen between values (without spaces), eg:
-	`<!--LCSTART-->$50-100<!--LCEND-->`
 
-Note: If you disable the plugin, the tags will remain in your post but will not be shown, because they are in a HTML comment.
+	`[localcurrency]$65-$75[/localcurrency]`
+
+There is a site-wide Site Currency setting which is used as the 'from' currency. To override this and convert from a different currency for a specific value, specify the 'from' currency, 
+
+	`[localcurrency from="GBP"]£65[/localcurrency]`
+
+The plugin will work with more than one currency per page, but will be much slower.
+
+Note: This plugin used to use the following format: `<!--LCSTART-->`$10`<!--LCEND-->`. This will still work but it is recommended to use the shortcode format shown above. Please do not use both formats on the one page.
 
 = Warning =
 The plugin strips non numeric characters (such as $) from between the tags, before converting the value. However, some currency symbols may include numeric characters. For example, 10&#20803; may be stored as 10`&amp;#20803;`. The 20803 will remain after the non numeric characters are stripped and will be considered as part of the value to convert, resulting in an incorrect value.
 
-If you experience this problem, simply leave the currency sign outside the tags (ie: `<!--LCSTART-->`10`<!--LCEND-->`&#20803;).
+If you experience this problem, please leave the currency sign outside the tags (ie: `&#20803;[localcurrency]10[/localcurrency]`).
 
 = Compatibility: =
 * This plugin requires WordPress 2.8 or above.
@@ -56,20 +67,21 @@ Note: The plugin is large compared to most WordPress plugins, due the IP2C datab
 Alternatively, you can install the plugin automatically through the WordPress Admin interface by going to Plugins -> Add New and searching for LocalCurrency.
 
 = Upgrade =
-1. Download the plugin file and unzip it.
-1. Upload the `localcurrency` folder to the `wp-content/plugins/` folder, overwriting the existing files.
-1. Deactivate the LocalCurrency plugin within WordPress, then reactivate it (to make sure any new settings are created).
-Alternatively, you can update this plugin through the WordPress Admin interface.
+1. Please update this plugin through the WordPress Admin interface.
 
 == Frequently Asked Questions ==
 
 = Will there be future enhancements to LocalCurrency? =
-This plugin was created in my spare time, which is ever-dwindling. I have intentions to update it regularly, but recognise that other things must take precendence. If you have a request, by all means [contact me](http://www.scratch99.com/contact/) and I'll put it on the list of things to do, but I can't guarantee how long it will take.
+This plugin was created in my spare time, which is ever-dwindling. I have intentions to update it regularly, but recognise that other things must take precendence. If you have a request, by all means [contact me](http://scratch99.com/contact/) and I'll put it on the list of things to do, but I can't guarantee how long it will take.
 
 == Screenshots ==
 No screenshots exist at this time, but you can see the plugin in action on my [Cost of living in China](http://www.jobsinchina.com/blog/the-cost-of-living-in-china/) post.
 
 == Changelog ==
+
+= 2.9 (1st June 2015) =
+* New Feature: The plugin now uses the standard WordPress shortcode system. The old format will still work but is not recommended.
+* New Feature: The 'from' currency can now be specified for each value to be converted.
 
 = 2.8.1 (21st May 2015) =
 * Update: Added Armenian AMD and Georgian GEL.
