@@ -38,7 +38,7 @@ For a currency range, use a hyphen between values (without spaces), eg:
 
 There is a site-wide Site Currency setting which is used as the 'from' currency. To override this and convert from a different currency for a specific value, specify the 'from' currency (using a valid currency code): 
 
-	`[localcurrency from="AUD"]$65[/localcurrency]`
+	[localcurrency from="AUD"]$65[/localcurrency]
 
 The plugin will work with more than one currency per page, but will be much slower.
 
