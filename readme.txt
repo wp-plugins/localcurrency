@@ -28,17 +28,17 @@ I've seen many bloggers write something like: 10 yuan (about $1.50) - because ma
 = How To Use (once plugin is installed) =
 Enter any currency values you want converted using the localcurrency shortcode. For example:
 
-	`[localcurrency]$65[/localcurrency]`
+	[localcurrency]$65[/localcurrency]
 
 This can be done manually through the Visual view in the post editor, or using the LocalCurrency Quicktag in the Code view (select the number to be converted and click the quicktag). 
 
 For a currency range, use a hyphen between values (without spaces), eg:
 
-	`[localcurrency]$65-$75[/localcurrency]`
+	[localcurrency]$65-$75[/localcurrency]
 
-There is a site-wide Site Currency setting which is used as the 'from' currency. To override this and convert from a different currency for a specific value, specify the 'from' currency, 
+There is a site-wide Site Currency setting which is used as the 'from' currency. To override this and convert from a different currency for a specific value, specify the 'from' currency:
 
-	`[localcurrency from="GBP"]£65[/localcurrency]`
+	[localcurrency from="GBP"]£65[/localcurrency]
 
 The plugin will work with more than one currency per page, but will be much slower.
 
